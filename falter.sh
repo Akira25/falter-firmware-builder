@@ -6,7 +6,7 @@
 THREADS=9 # amount of cpu-threads +1
 DIFFCONFIG=$(cat diff_config_freifunk)
 BUILDDIR="falter-firmware"
-VERSION="v0.0.2"
+VERSION="v0.0.3"
 
 set -e
 
@@ -64,8 +64,9 @@ case $1 in
     ;;
     "-u" | "--upgrade")
         update
+    ;;
     *)
-    echo "Falter-script $VERSION
+    echo -e "Falter-script $VERSION
 To build falter-images, execute the options in this order.
 
 -i | --init\tinitialise buildsystem

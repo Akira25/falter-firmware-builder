@@ -17,3 +17,6 @@ EVER use only one option at the same time!
 ```
 The buildsystem will reside in a subdirectory `falter-firmware/`. This is adjustible in the header
 of the script.
+
+You may provide your own diffconfig for OpenWrt in the file `diff_config_freifunk`. Thus you can
+control, which packages will be included into the images.
