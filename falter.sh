@@ -6,7 +6,7 @@
 THREADS=9 # amount of cpu-threads +1
 DIFFCONFIG=$(cat diff_config_freifunk)
 BUILDDIR="falter-firmware"
-VERSION="v0.0.3"
+VERSION="v0.0.4"
 
 set -e
 
@@ -31,6 +31,12 @@ update() {
     cd $BUILDDIR
     git pull
     update_owrt
+}
+
+after_branch_change() {
+    cd $BUILDDIR
+    echo "performing distclean on $BUILDDIR..."
+    make distclean
 }
 
 write_diffconfig() {
@@ -62,8 +68,11 @@ case $1 in
         echo "start building falter with $THREADS threads..."
         make -j$THREADS V=s
     ;;
-    "-u" | "--upgrade")
+    "-u" | "--update")
         update
+    ;;
+    "-b" | "--branch")
+        after_branch_change
     ;;
     *)
     echo -e "Falter-script $VERSION
@@ -78,6 +87,10 @@ optional:
 -u | --update\tupdates with new patches from falter-repo.
 \t\tAfter using this option, you need to start
 \t\tagain at option -s.
+-b | --branch\tif you want to build falter on another
+\t\tOpenWrt-branch than master, check out that
+\t\tbranch via git. Afterwards run this option
+\t\tand start again at -w.
 
 EVER use only one option at the same time!"
     ;;

@@ -1,6 +1,7 @@
 This script sets up a falter-build-system in a half automated manner. You can use this parameters:
 
 ```
+Falter-script v0.0.4
 To build falter-images, execute the options in this order.
 
 -i | --init     initialise buildsystem
@@ -12,6 +13,10 @@ optional:
 -u | --update   updates with new patches from falter-repo.
                 After using this option, you need to start
                 again at option -s.
+-b | --branch   if you want to build falter on another
+                OpenWrt-branch than master, check out that
+                branch via git. Afterwards run this option
+                and start again at -s.
 
 EVER use only one option at the same time!
 ```
