@@ -6,9 +6,9 @@
 # get amount of cpu-threads +1
 THREADS_TMP=$(lscpu | grep "CPU(s):" | head -n 1 | rev | cut -d' ' -f 1)
 THREADS=$(($THREADS_TMP + 1))
-DIFFCONFIG=$(cat diff_config_freifunk)
+DIFFFILE=$2
 BUILDDIR="falter-firmware"
-VERSION="v0.0.5"
+VERSION="v0.0.6"
 
 set -e
 
@@ -57,6 +57,7 @@ write_diffconfig() {
     ./scripts/diffconfig.sh > diffconfig
 
     # write diff for freifunk-packages
+    DIFFCONFIG=$(cat "$DIFFFILE")
     for FLAG in $DIFFCONFIG; do
         echo "$FLAG" >>diffconfig
     done
@@ -94,14 +95,14 @@ To build falter-images, execute the options in this order.
 
 -i | --init\tinitialise buildsystem
 -s | --select\tselect the target, falter will be built for
--w | --write\twrite the package-selection to buildsystem
+-w | --write [FILE]\twrite the package-selection to buildsystem
 -m | --make\tstart building
 
 optional:
 -u | --update\t\tupdates with new patches from falter-repo.
 \t\t\tAfter using this option, you need to start
 \t\t\tagain at option -s.
--b | --branch [\$BRANCH]\tif you want to build falter on a different
+-b | --branch [BRANCH]\tif you want to build falter on a different
 \t\t\tOpenWrt-branch than master, give the branch
 \t\t\tor tag. After executing this option start
 \t\t\tagain at -s.
