@@ -8,7 +8,7 @@ THREADS_TMP=$(lscpu | grep "CPU(s):" | head -n 1 | rev | cut -d' ' -f 1)
 THREADS=$(($THREADS_TMP + 1))
 DIFFFILE=$2
 BUILDDIR="falter-firmware"
-VERSION="v0.0.6"
+VERSION="v0.0.7"
 
 set -e
 
@@ -49,6 +49,9 @@ branch_change() {
 }
 
 write_diffconfig() {
+    # read configuration from file
+    DIFFCONFIG=$(cat "$DIFFFILE")
+
     # write new diffconfig
     cd $BUILDDIR
     if [ -e diffconfig ]; then
@@ -57,7 +60,6 @@ write_diffconfig() {
     ./scripts/diffconfig.sh > diffconfig
 
     # write diff for freifunk-packages
-    DIFFCONFIG=$(cat "$DIFFFILE")
     for FLAG in $DIFFCONFIG; do
         echo "$FLAG" >>diffconfig
     done
