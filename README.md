@@ -36,7 +36,8 @@ cd falter-firmware-builder
 ./falter.sh -i
 ```
 Then, checkout the stable OpenWrt-release via the `-b` option. This will perform some additional
-cleaning actions in the build-system.
+cleaning actions in the build-system. It might happen, that the menuconfig-dialog will appear after this step.
+Skip that first selection dialog as is and continue with the next step.
 ```
 ./falter.sh -b v19.07.4
 ```
