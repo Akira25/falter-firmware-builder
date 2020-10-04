@@ -21,6 +21,7 @@ CONFIG_PACKAGE_falter-berlin-system-defaults=y
 CONFIG_PACKAGE_falter-berlin-uhttpd-defaults=y
 CONFIG_PACKAGE_falter-common=y
 CONFIG_PACKAGE_falter-common-olsr=y
+CONFIG_PACKAGE_falter-profiles=y
 CONFIG_PACKAGE_ip-full=y
 CONFIG_PACKAGE_iperf=y
 CONFIG_PACKAGE_kmod-ipip=y
