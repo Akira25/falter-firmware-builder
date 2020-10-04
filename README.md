@@ -52,3 +52,16 @@ Write the image-type's diffconfig to the buildsystem. There are diffconfigs for 
 ./falter.sh -w falter_19.07.4/falter_19.07.4_tunneldigger
 ```
 Finally start building by `./falter.sh -m`. The script will start the build process with CPU_CORES+1 threads and the option V=sc.
+
+## build_target.sh: Build a whole target/all targets at once
+The script `build_target.sh` can build one specific target or all defined targets at once. It handles the buildsystem via the `falter.sh` script. To build all targets at once, just execute the script without any option:
+```
+./build_target.sh
+```
+The script will handle the rest. You won't need to do any further steps. The script will also handle the inital creation of the buildsystem, if there isn't any.
+
+To build a specific target, give its configuration-file from the `target_config/` directory.
+```
+./build_target.sh target_config/ath79
+```
+You can configure, which router-boards to be built, at those files. They use the same syntax, as the config-files for regular openwrt-buildsystem. You may also add there packages to be included in specific router-boards only.
