@@ -49,7 +49,7 @@ Select target and routers, images should be generated for. Standard is, to build
 
 Write the image-type's diffconfig to the buildsystem. There are diffconfigs for each of traditional Freifunk Berlin image-types.
 ```
-./falter.sh -w falter_19.07.4/falter_19.07.4_tunneldigger
+./falter.sh -w diffconfigs/falter_19.07.4/falter_19.07.4_tunneldigger
 ```
 Finally start building by `./falter.sh -m`. The script will start the build process with CPU_CORES+1 threads and the option V=sc.
 
