@@ -5,8 +5,9 @@
 
 # get amount of cpu-threads +1
 THREADS_TMP=$(lscpu | grep "CPU(s):" | head -n 1 | rev | cut -d' ' -f 1)
-THREADS=$(($THREADS_TMP + 1))
+THREADS=$((THREADS_TMP + 1))
 DIFFFILE=$2
+VERSIONDEF="build_config/version"
 BUILDDIR="falter-firmware"
 VERSION="v0.0.7"
 
@@ -43,7 +44,7 @@ branch_change() {
     echo "performing distclean on $BUILDDIR..."
     make distclean
     echo "switching branch to $1..."
-    git checkout $1
+    git checkout "$1"
     add_falter_feed
     update_owrt
 }
@@ -51,6 +52,7 @@ branch_change() {
 write_diffconfig() {
     # read configuration from file
     DIFFCONFIG=$(cat "$DIFFFILE")
+    VERSIONINFO=$(cat "$VERSIONDEF")
 
     # write new diffconfig
     cd $BUILDDIR
@@ -63,6 +65,8 @@ write_diffconfig() {
     for FLAG in $DIFFCONFIG; do
         echo "$FLAG" >>diffconfig
     done
+    # add version-info, to generate images named Freifunk-falter[...]
+    echo "$VERSIONINFO" >> diffconfig
     cp diffconfig .config
     #cat diffconfig >>.config
     make defconfig
@@ -89,10 +93,10 @@ case $1 in
     ;;
     "-b" | "--branch")
         TAG=$2
-        branch_change $TAG
+        branch_change "$TAG"
     ;;
     *)
-    echo -e "Falter-build-script $VERSION
+    printf "Falter-build-script %s
 To build falter-images, execute the options in this order.
 
 -i | --init\tinitialise buildsystem
@@ -109,7 +113,7 @@ optional:
 \t\t\tor tag. After executing this option start
 \t\t\tagain at -s.
 
-EVER use only one option at the same time!"
+EVER use only one option at the same time!\n" "$VERSION"
     ;;
 
 esac
