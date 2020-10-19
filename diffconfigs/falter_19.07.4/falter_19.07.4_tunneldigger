@@ -10,6 +10,7 @@ CONFIG_PACKAGE_collectd-mod-olsrd=y
 CONFIG_PACKAGE_collectd-mod-ping=y
 CONFIG_PACKAGE_collectd-mod-rrdtool=y
 CONFIG_PACKAGE_collectd-mod-uptime=y
+CONFIG_PACKAGE_falter-berlin-bbbdigger=m
 CONFIG_PACKAGE_falter-berlin-dhcp-defaults=y
 CONFIG_PACKAGE_falter-berlin-firewall-defaults=y
 CONFIG_PACKAGE_falter-berlin-fix-luci=y
